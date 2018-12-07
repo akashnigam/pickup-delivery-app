@@ -20,7 +20,8 @@ public class AddPickupDeliveryActivity extends AppCompatActivity {
         String pickupLoc = pickupText.getText().toString();
         String deliveryLoc = deliveryText.getText().toString();
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("result",pickupLoc);
+        returnIntent.putExtra("pickupLoc",pickupLoc);
+        returnIntent.putExtra("deliveryLoc",pickupLoc);
         setResult(RESULT_OK,returnIntent);
         finish();
     }

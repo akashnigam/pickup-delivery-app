@@ -16,9 +16,16 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private ArrayAdapter adapter;
+
     private ArrayList<String> arrayList;
 
+    private ArrayList<ArrayList<String>> completeJobList;
+
     static final int GET_LOCATIONS = 1;
+
+    static final String PICKUP_LOC = "pickupLoc";
+
+    static final String DELIVERY_LOC = "deliveryLoc";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         ListView list = findViewById(R.id.listView);
         //ScrollView list = findViewById(R.id.listView);
+        completeJobList = new ArrayList<ArrayList<String>>();
         arrayList = new ArrayList<String>();
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayList);
         list.setAdapter(adapter);
@@ -43,13 +51,16 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == GET_LOCATIONS) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                arrayList.add(data.getStringExtra("result"));
+                String pickupLoc = data.getStringExtra("pickupLoc");
+                String deliveryLoc = data.getStringExtra("deliveryLoc");
+                ArrayList<String> locArr = new ArrayList<String>();
+                locArr.add(pickupLoc);
+                locArr.add(deliveryLoc);
+                completeJobList.add(locArr);
+                String concatLocations = "Pickup Location:" + pickupLoc + "\nDelivery Location:" + deliveryLoc;
+                arrayList.add(concatLocations);
                 Toast.makeText(this,"Already Logged In",Toast.LENGTH_SHORT).show();
                 adapter.notifyDataSetChanged();
-                // The user picked a contact.
-                // The Intent's data Uri identifies which contact was selected.
-
-                // Do something with the contact here (bigger example below)
             }
         }
     }
