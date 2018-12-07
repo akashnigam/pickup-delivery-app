@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         //ScrollView list = findViewById(R.id.listView);
         completeJobList = new ArrayList<ArrayList<String>>();
         arrayList = new ArrayList<String>();
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayList);
+        adapter = new ArrayAdapter<String>(this, R.layout.activity_listview, arrayList);
         list.setAdapter(adapter);
     }
 
