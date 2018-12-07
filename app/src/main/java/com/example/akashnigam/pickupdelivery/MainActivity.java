@@ -6,21 +6,15 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         arrayList = new ArrayList<String>();
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String completeJobListStr = prefs.getString("completeJobList", null);
-        if(!completeJobListStr.equals(null)) {
+        if(completeJobListStr != null) {
             completeJobList = decodeJsonString(completeJobListStr);
             updateArrayList(completeJobList);
         }
