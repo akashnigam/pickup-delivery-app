@@ -25,8 +25,8 @@ public class AddPickupDeliveryActivity extends AppCompatActivity {
     }
 
     public void submitLocations(View view) {
-        TextView pickupText = (TextView) findViewById(R.id.pickupLocation);
-        TextView deliveryText = (TextView) findViewById(R.id.deliveryLocation);
+        TextView pickupText = (TextView) findViewById(R.id.pickupLocation_tv);
+        TextView deliveryText = (TextView) findViewById(R.id.deliveryLocation_tv);
         String pickupLoc = pickupText.getText().toString();
         String deliveryLoc = deliveryText.getText().toString();
         Intent returnIntent = new Intent();
@@ -56,18 +56,20 @@ public class AddPickupDeliveryActivity extends AppCompatActivity {
         if (requestCode == PICKUP_PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(this, data);
-                String toastMsg = String.format("Place: %s", place.getName());
+                String pickupAddress = (String) place.getAddress();
+                String toastMsg = String.format("Pickup Location: %s", pickupAddress);
                 Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
-                TextView pickupText = (TextView) findViewById(R.id.pickupLocation);
-                pickupText.setText(toastMsg);
+                TextView pickupText = (TextView) findViewById(R.id.pickupLocation_tv);
+                pickupText.setText(pickupAddress);
             }
         } else if (requestCode == DELIVERY_PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(this, data);
-                String toastMsg = String.format("Place: %s", place.getName());
+                String deliveryAddress = (String) place.getAddress();
+                String toastMsg = String.format("Drop Location: %s", deliveryAddress);
                 Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
-                TextView deliveryText = (TextView) findViewById(R.id.deliveryLocation);
-                deliveryText.setText(toastMsg);
+                TextView deliveryText = (TextView) findViewById(R.id.deliveryLocation_tv);
+                deliveryText.setText(deliveryAddress);
             }
         }
     }
